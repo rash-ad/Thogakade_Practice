@@ -1,37 +1,33 @@
 package Controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
 
 import java.util.ArrayList;
 
 public class SampleController {
-    public Label lableText;
-    public TextField txtFieldName;
     public TextField txtUserName;
     public TextField txtEmail;
     public TextField txtSalary;
     public TextField txtId;
-    public Button btnAddCustomer;
     public TextField txtAddress;
-    public TreeTableColumn TableDetails;
-    public TreeTableColumn colId;
-    public TreeTableColumn ColUserName;
-    public TreeTableColumn ColAddress;
-    public TreeTableColumn ColSalary;
-    public TreeTableColumn ColEmail;
+   
+    public TableView tableCustomerDetails;
+    public TableColumn ColSalary;
+    public TableColumn ColAddress;
+    public TableColumn ColEmail;
+    public TableColumn ColId;
+    public TableColumn ColUsername;
+    public Button btnAddCustomer;
     public Button btnReload;
 
-    public void btnClickMeOnAction(ActionEvent actionEvent) {
-        String text = txtFieldName.getText();
-        lableText.setText("Hello , "+text+"!");
-        System.out.println("Button Clicked");
-    }
+
     ArrayList<Customer>CustomerArrayList=new ArrayList<>();
+
     public void btnAddCustomerOnAction(ActionEvent actionEvent) {
 
         String id = txtId.getText();
@@ -42,6 +38,27 @@ public class SampleController {
 
         Customer customer= new Customer(id,textUserName,Address,txtSalaryText,txtEmailText);
         CustomerArrayList.add(customer);
+        System.out.println("ArrayList :"+CustomerArrayList);
+        loadTable();
+
+
+    }
+
+    public void btnReloadOnAction(ActionEvent actionEvent) {
+        loadTable();
+    }
+
+    private void loadTable() {
+
+        ColId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ColUsername.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+
+        ObservableList<Customer>customerOBservableList= FXCollections.observableArrayList();
+        CustomerArrayList.forEach( customer ->{
+            customerOBservableList.add(customer);
+        });
+        tableCustomerDetails.setItems(customerOBservableList);
 
     }
 }

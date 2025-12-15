@@ -18,6 +18,10 @@ public Customer(String id,String name,String email,double salary,String address)
 
 
 }
+
+public Customer(){
+
+}
     public void setEmail(String email) {
         this.email = email;
     }
@@ -36,5 +40,15 @@ public Customer(String id,String name,String email,double salary,String address)
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", salary=" + salary +
+                '}';
     }
 }
