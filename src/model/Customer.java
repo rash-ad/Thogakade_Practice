@@ -1,37 +1,45 @@
 package model;
 
-import javax.swing.*;
-
 public class Customer {
-    private String id;
-    private  String name;
+    private String customerId;
+    private String name;
     private String email;
-    private double salary;
     private String address;
+    private Double salary;
 
-public Customer(String id,String name,String email,double salary,String address){
-    this.id=id;
-    this.name=name;
-    this.email=email;
-    this.salary=salary;
-    this.address=address;
+    public Customer(String customerId, String name, String email, String address, Double salary) {
+        this.customerId = customerId;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.salary = salary;
+    }
 
+    public Customer() {
+    }
 
-}
+    public String getCustomerId() {
+        return customerId;
+    }
 
-public Customer(){
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
 
-}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
     }
 
     public String getAddress() {
@@ -41,10 +49,19 @@ public Customer(){
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
-                "customerId='" + id + '\'' +
+                "customerId='" + customerId + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
