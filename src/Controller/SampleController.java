@@ -3,62 +3,67 @@ package Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
 
 import java.util.ArrayList;
 
 public class SampleController {
-    public TextField txtUserName;
-    public TextField txtEmail;
-    public TextField txtSalary;
-    public TextField txtId;
+    public TextField txtCustomerId;
     public TextField txtAddress;
-   
-    public TableView tableCustomerDetails;
-    public TableColumn ColSalary;
-    public TableColumn ColAddress;
-    public TableColumn ColEmail;
-    public TableColumn ColId;
-    public TableColumn ColUsername;
-    public Button btnAddCustomer;
-    public Button btnReload;
+    public TextField txtSalary;
+    public TextField txtName;
+    public TextField txtEmail;
+    public TableView tblCustomerList;
+    public TableColumn colCustomerId;
+    public TableColumn colName;
+    public TableColumn colEmail;
+    public TableColumn colAddress;
+    public TableColumn colSalary;
 
-
-    ArrayList<Customer>CustomerArrayList=new ArrayList<>();
+    ArrayList<Customer> customerArrayList = new ArrayList<>();
 
     public void btnAddCustomerOnAction(ActionEvent actionEvent) {
 
-        String id = txtId.getText();
-        String textUserName = txtUserName.getText();
-        String Address = txtAddress.getText();
-        double txtSalaryText = Double.parseDouble(txtSalary.getText());
-        String txtEmailText = txtEmail.getText();
+        String customerId = txtCustomerId.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        double salary = Double.parseDouble(txtSalary.getText());
+        String email = txtEmail.getText();
 
-        Customer customer= new Customer(id,textUserName,Address,txtSalaryText,txtEmailText);
-        CustomerArrayList.add(customer);
-        System.out.println("ArrayList :"+CustomerArrayList);
+        Customer customer = new Customer(customerId, name, email, salary, address);
+        System.out.println("Object : "+customer);
+
+        customerArrayList.add(customer);
+
+        System.out.println("Array List: "+customerArrayList);
+
+        System.out.println("Customer Added: " + customerId + ", " + name + ", " + address + ", " + salary + ", " + email);
         loadTable();
-
-
     }
 
     public void btnReloadOnAction(ActionEvent actionEvent) {
         loadTable();
+
     }
+    private void loadTable(){
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        ObservableList<Customer> customerObservableList = FXCollections.observableArrayList();
 
-    private void loadTable() {
-
-        ColId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ColUsername.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-
-        ObservableList<Customer>customerOBservableList= FXCollections.observableArrayList();
-        CustomerArrayList.forEach( customer ->{
-            customerOBservableList.add(customer);
+        customerArrayList.forEach(customer -> {
+            customerObservableList.add(customer);
         });
-        tableCustomerDetails.setItems(customerOBservableList);
 
+        tblCustomerList.setItems(customerObservableList);
     }
+
+
 }
